@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %} Rowley Company - Real Estate Booking {% endblock %}
+{% block head %}
+  {{super()}}
+  <link rel="stylesheet" href="/static/css/booking.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <title> Rowley Company - Real Estate Booking </title>
+   
+{% endblock %}
+{% block content %}
+    <section class="booking-section">
+        <div class="booking-container">
+            <form id="booking-form" action="/booking" method="POST">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="notification is-danger">
+                        {{ messages[0]|safe }}
+                    </div>
+                {% endif %}
+                {% endwith %}
+                <h1> Booking </h1>
+                <div class="booking-input">
+                    <input type="text" name="username" placeholder="Username" pattern="[A-Za-z ]+" required>
+                </div>
+                <div class="booking-input">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="booking-input">   
+                    <input type="tel" name="telephone" placeholder="Telephone Number" pattern="[0-9]{10}" required>
+                </div>
+                <div class="booking-input">
+                    <select name="property-type" required>
+                        <option value="" disabled selected > Select Property Type </option>
+                        <option value="apartment">Apartment</option>
+                        <option value="single-family-home">Single Family Home</option>
+                        <option value="townhouse">Townhouse</option>
+                    </select>
+                </div>
+                <div class="booking-input">
+                    <select name="booking-hours"  required>
+                        <option value="" disabled selected > Choose Booking Hours</option>
+                        <option value="7:00am"> 7:00am </option>
+                        <option value="11:00am"> 11:00am </option>
+                        <option value="2:00pm"> 2:00pm </option>
+                        <option value="4:00pm"> 4:00pm </option>
+                        <option value="5:30pm"> 5:30pm </option>
+                    </select>
+                </div>
+                <div class="booking-input">
+                    <input type="text" id="datepicker" name="date" placeholder=" Choose date" required>
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <div class="contact-us">
+                <p>Contact us:</p>
+                <p>Phone: +254783756937</p>
+                <p>Email: waiyegondungu@gmail.com</p>
+                <p>Location: Pacan Suites opposite Murang'a Creameries</p>
+                <p>Postal Address: 68 Kangema</p>
+            </div>
+            <div class="welcome">
+                <h2>Welcome to Rowley Company - Your Trusted Partner in Real Estate Management</h2>
+            </div>
+        </div>
+    </section>
+    <script>
+        $(function() {
+            $("#datepicker").datepicker();
+        });
+    </script>
+{% endblock %}

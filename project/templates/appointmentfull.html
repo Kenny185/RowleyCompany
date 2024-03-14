@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rowley Company - Real Estate Booking</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #FFD700, #001F3F);
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #logo {
+      display: flex;
+      align-items: center;
+    }
+
+    #logo img {
+      width: 100px;
+      height: 100px;
+      margin-right: 10px;
+    }
+
+    #company-name {
+      font-size: 24px;
+      color: #FFF;
+    }
+
+    #navigation {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-link {
+      margin: 0 15px;
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-link:hover {
+      color: #001F3F;
+    }
+
+    #booking-message {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #book-now-btn {
+      background-color: #000;
+      color: #FFD700;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #book-now-btn:hover {
+      background-color: #001F3F;
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <div id="logo">
+      <img src="/Images/de30038bf36a1146441892552da72a4e.jpg" alt="Rowley Company Logo">
+      <span id="company-name">Rowley Company</span>
+    </div>
+    <div id="navigation">
+      <a href="/Scripts/home.html" class="nav-link">Home</a>
+      <a href="/Scripts/about.html" class="nav-link">About Us</a>
+      <a href="/Scripts/login.html" class="nav-link">Login</a>
+      <a href="/Scripts/signup.php" class="nav-link">Sign Up</a>
+    </div>
+  </header>
+
+  <section id="booking-message">
+    <p>Sorry, the booked time/date is full. Kindly book another time.</p>
+    <button id="book-now-btn" onclick="window.location.href='/Scripts/booking.php'">Book Now</button>
+  </section>
+
+</body>
+</html>

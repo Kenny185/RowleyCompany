@@ -1,0 +1,49 @@
+
+.about {
+    background: black url('/static/images/picture2.jpg') center/cover no-repeat;
+    color: gold;
+    padding: 100px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.history,
+.core-values,
+.mission,
+.vision {
+    margin-bottom: 20px;
+}
+.core-values ul {
+    list-style-type: none;
+    padding: 0;
+}
+.history p,
+.mission p,
+.vision p {
+    color: gold;
+}
+
+.footer {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    background-color: maroon;
+    color: gold;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    position: relative;
+
+}
+.contact-us {
+    margin-bottom: 20px;
+}
+.contact-us p{
+    margin-bottom: 5px;
+}
+.welcome {
+    font-size: 15px;
+}

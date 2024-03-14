@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %} Real Estate Management Login {% endblock %}
+{% block head %}
+  {{super()}}
+  <link rel="stylesheet" href="/static/css/login.css">
+  <title> Real Estate Management Login </title>   
+{% endblock %}
+{% block content %}
+  <div class="login-container">
+    <form class="login-form" method="post" action="/login">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="notification is-danger">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+      {% endwith %}
+      <h2><strong> Login </strong></h2>
+      <div class="input-field">
+        <input
+          type="email" name="email"
+          id="email" placeholder="Email"
+          required
+        />
+      </div>
+      <div class="input-field">
+        <input
+          type="password" name="password"
+          id="password" placeholder="Password"
+          required
+        />
+      </div>
+      <div class="forgot"> 
+        <a href="#"> Forgot Password?</a>
+      </div>
+      <div class="field">
+        <label class="checkbox">
+            <input type="checkbox" name="remember">
+            Remember me
+        </label>
+      </div>
+      <div class="login-button">
+        <button> Login </button>
+      </div>
+      <div class="signup-link">
+        <p> Do you have an account? </P>
+        <p><a href="{{url_for('auth.signup')}}">Sign up</a></p>
+      </div>
+    </form>
+  </div>
+{% endblock %}

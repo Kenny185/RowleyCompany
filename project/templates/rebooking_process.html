@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rowley Company - Booking Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: black;
+            color: gold;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #logo {
+            display: flex;
+            align-items: center;
+        }
+
+        #logo img {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: gold;
+            text-decoration: none;
+            padding: 0 10px;
+        }
+
+        main {
+            background-image: url('/Images/town\ house.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 50px;
+            color: gold;
+        }
+
+        #booking-form {
+            background-color: black;
+            padding: 100px;
+            border-radius: 10px;
+            width: 25%;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid gold;
+            border-radius: 5px;
+        }
+
+        #contact-info {
+            background-color: maroon;
+            padding: 50px;
+            color: gold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div id="logo">
+            <img src="/Images/de30038bf36a1146441892552da72a4e.jpg" alt="Logo">
+            <span>Rowley Company</span>
+        </div>
+        <nav>
+            <a href="/Scripts/home.html"> Home </a>
+            <a href="/Scripts/about.html">About Us</a>
+            <a href="login.php">Login</a>
+            <a href="/Scripts/signup.html">Sign Up</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="booking-form">
+            <div class="form-group">
+                <label for="property-type">Property Type:</label>
+                <select id="property-type">
+                    <option value="apartment">Apartment</option>
+                    <option value="single-family-home">Single Family Home</option>
+                    <option value="town-houses">Town Houses</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="booking-hours">Booking Hours:</label>
+                <select id="booking-hours">
+                    <option value="7:00am">7:00am</option>
+                    <option value="11:00am">11:00am</option>
+                    <option value="2:00pm">2:00pm</option>
+                    <option value="4:00pm">4:00pm</option>
+                    <option value="5:30pm">5:30pm</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date">
+            </div>
+            <button id="submit-btn">Submit</button>
+        </div>
+    </main>
+
+    <div id="contact-info">
+        <p>Contact Us:</p>
+        <p>+254 783 756 937</p>
+        <p>Email: waiyegondungu@gmail.com</p>
+        <p>Location: Pacan Suites opposite Murang'a Creameries</p>
+        <p>Postal Address: 68 Kangema</p>
+        <p>Welcome to Rowley Company - Your Trusted Partner in Real Estate Management</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitButton = document.getElementById('submit-btn');
+            submitButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                
+                const selectedTime = document.getElementById('booking-hours').value;
+                
+                // Check if the selected time is full
+                if (isTimeFull(selectedTime)) {
+                    window.location.href = 'bookingfull.html';
+                } else {
+                    // Implement your booking logic here
+                    alert('Booking Successful!');
+                }
+            });
+
+            function isTimeFull(selectedTime) {
+                // Implement your logic to check if the selected time is full
+                // For demonstration purposes, assume the time is full after 5 bookings
+                const bookingsCount = 5; 
+                
+                // Add your logic here to check the actual number of bookings for the selected time
+                return bookingsCount >= 5;
+            }
+        });
+    </script>
+
+</body>
+</html>

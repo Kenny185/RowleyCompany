@@ -1,0 +1,48 @@
+.main-section {
+    background-color: black;
+    color: gold;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.rotation-images {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.rotation-images img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.main-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.main-content li{
+    list-style: none;
+}
+.footer {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    background-color: maroon;
+    color: gold;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    position: relative;
+
+}
+.contact-us {
+    margin-bottom: 20px;
+}
+.contact-us p{
+    margin-bottom: 5px;
+}
+.welcome {
+    font-size: 15px;
+}

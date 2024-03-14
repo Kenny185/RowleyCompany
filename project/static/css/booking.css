@@ -1,0 +1,100 @@
+.booking-section {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.booking-container {
+    background: url('/static/images/townHouse.jpg') no-repeat;
+    background-size: cover;
+    padding: 20px;
+    color: gold;
+    text-align: center;
+    align-items: center;
+}
+
+#booking-form {
+    background-color: black;
+   
+}
+form {
+    width: 500px;
+    padding: 20px;
+    margin: 8vh auto 0 auto;
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 17px;
+}
+form h1{
+    padding: 5px;
+    text-align: center;
+    border-radius: 2px;
+}
+.booking-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.booking-input input{
+    padding: 22px 15px 10px 0;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    
+}
+.booking-input select{
+    padding: 20px;
+}
+.booking-input input[type="submit"] {
+    background-color: gold;
+    color: black;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.booking-input input[type="text"],
+.booking-input input[type="email"],
+.booking-input input[type="tel"],
+.booking-input select,
+.booking-input input[type="date"] {
+    color: white; 
+    background-color: #333; 
+    border: 1px solid #ccc; 
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.booking-input input[type="text"]:focus,
+.booking-input input[type="email"]:focus,
+.booking-input input[type="tel"]:focus,
+.booking-input select:focus,
+.booking-input input[type="date"]:focus {
+    color: black;
+    background-color: #fff;
+    border-color: #555;
+    outline: none;
+}
+
+.footer {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    background-color: maroon;
+    color: gold;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    position: relative;
+
+}
+.contact-us {
+    margin-bottom: 20px;
+}
+.contact-us p{
+    margin-bottom: 5px;
+}
+.welcome {
+    font-size: 15px;
+}

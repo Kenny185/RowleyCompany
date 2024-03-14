@@ -1,0 +1,43 @@
+.profile-check {
+    background-color: rgb(41, 41, 141);
+    border: 5px solid gold;
+    border-radius: 15px;
+    padding: 20px 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+}
+.profile-form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.profile-form input{
+    padding: 22px 15px 10px 0;
+    margin-top: 23px;
+    background: cadetblue;
+    font-size: 15px;
+    border-radius: 10px;
+    text-align: center;
+
+}
+.submit-btn{
+    margin-bottom: 20px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.submit-btn button{
+    width: 100%;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: gold;
+    border: none;
+    border-radius: 70px;
+    cursor: pointer;
+}
