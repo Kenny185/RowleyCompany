@@ -6,6 +6,7 @@
   <title> Rowley Company - Signup </title>   
 {% endblock %}
 {% block content %}
+<section class="signup-section">
     <div class="signup-container">
         <h2>Sign Up</h2>
         <form class="signup-form" action="/signup" method="POST">
@@ -36,14 +37,19 @@
             <button type="submit">Sign Up</button>
         </form>
     </div>
-    <div class="contact-section">
-        <h2>Contact Us</h2>
-        <p>Phone: +254783756937</p>
-        <p>Email: waiyegondungu@gmail.com</p>
-        <p>Location: Pacan Suites opposite Murang'a Creameries</p>
-        <p>Postal Address: 68 Kangema</p>
-        <p>Welcome to Rowley Company - Your Trusted Partner in Real Estate Management</p>
+    <div class="footer">
+        <div class="contact-us">
+            <p>Contact us:</p>
+            <p>Phone: +254783756937</p>
+            <p>Email: waiyegondungu@gmail.com</p>
+            <p>Location: Pacan Suites opposite Murang'a Creameries</p>
+            <p>Postal Address: 68 Kangema</p>
+        </div>
+        <div class="welcome">
+            <h2>Welcome to Rowley Company - Your Trusted Partner in Real Estate Management</h2>
+        </div>
     </div>
+</section>
     <script>
         function validatePassword(input) {
             var password = document.querySelector('input[name="password"]');

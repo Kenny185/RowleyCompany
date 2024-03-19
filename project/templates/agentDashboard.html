@@ -6,7 +6,46 @@
   <title> Agent Dashboard - Rowley Company </title>   
 {% endblock %}
 {% block content %}
-
-
+<section class="dashboard-section">
+  <div id="upper-part">
+      <div class="welcome-note">
+          <p>Welcome to Rowley Company - Your Trusted Partner in Real Estate Management</p>
+          <a  href="{{url_for('main.landingpage')}}"> Rowley Company Overview </a>
+      </div>
+  </div>
+  <div class="middle-part">
+      <div class="image-part">
+          <img src="/static/images/Capture.PNG" alt="House">
+      </div>
+      <div class="form-part">                
+          <div class="form-card">
+              <h2> Profile </h2>
+              <p> To manage you account information </p>
+              <form action="{{ url_for('main.profile') }}">
+                  <button type="submit"> Click here </button>
+              </form>
+          </div>
+          <div class="form-card">
+              <h2> Booking </h2>
+              <p> To secure one of our spaces  </p>
+              <form action="{{ url_for('main.booking') }}">
+                  <button type="submit"> Click here </button>
+              </form>
+          </div>   
+      </div>
+  </div>
+  <div class="footer">
+      <div class="contact-us">
+          <p>Contact us:</p>
+          <p>Phone: +254783756937</p>
+          <p>Email: waiyegondungu@gmail.com</p>
+          <p>Location: Pacan Suites opposite Murang'a Creameries</p>
+          <p>Postal Address: 68 Kangema</p>
+      </div>
+      <div class="welcome">
+          <h2>Welcome to Rowley Company - Your Trusted Partner in Real Estate Management</h2>
+      </div>
+  </div>
+<section>
 
 {% endblock %}

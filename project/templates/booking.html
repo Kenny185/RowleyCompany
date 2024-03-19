@@ -69,7 +69,9 @@
     </section>
     <script>
         $(function() {
-            $("#datepicker").datepicker();
+            $("#datepicker").datepicker({
+                minDate: +1 
+            });
         });
     </script>
 {% endblock %}

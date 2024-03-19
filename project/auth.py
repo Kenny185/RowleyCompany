@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash,
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User, Booking
 from . import db
+from datetime import datetime
 from flask_login import login_user, login_required, logout_user, current_user 
 
 auth = Blueprint('auth', __name__)
@@ -29,7 +30,10 @@ def login_post():
     # if the above check passes, then we know the user has the right credentials
     session['user_id'] = user.id
     login_user(user, remember=remember)
-    return redirect(url_for('main.dashboard'))
+    if user.role == 'agent':
+        return redirect(url_for('main.agentDashboard'))
+    else :
+        return redirect(url_for('main.clientDashboard'))        
 
 @auth.route('/signup')
 def signup():
@@ -138,8 +142,10 @@ def booking_post():
         
         db.session.add(new_booking)
         db.session.commit()
-        flash('Your booking has been successful! <a href="' + url_for('main.dashboard') + '"> Return to Dashboard </a>', 'success')
-    
+        flash('Your booking has been successful! <a href="' + url_for('main.payment', 
+                username=username, email=email, telephone=telephone, property_type=property_type, booking_hours=booking_hours, date=date)
+              + '"> Click to Proceed to payment </a>', 'success')
+        
     return render_template('booking.html')   
     
 

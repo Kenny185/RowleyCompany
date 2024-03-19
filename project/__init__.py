@@ -3,18 +3,22 @@ import secrets
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_session import Session
 
 db = SQLAlchemy()
 migrate = Migrate()
+# session = Session()
 
 def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = secrets.token_hex(16)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+    app.config['SESSION_TYPE'] = 'sqlalchemy'
 
     db.init_app(app)
     migrate.init_app(app, db)
+    # Session(app)
     
     from project import models
     from .models import User

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user 
 from . import db
 
@@ -10,12 +10,12 @@ def index():
 
 @main.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', active_page='home')
 
-@main.route('/dashboard')
+@main.route('/client_dashboard')
 @login_required
-def dashboard():
-    return render_template('dashboard.html', active_page='dashboard')
+def clientDashboard():
+    return render_template('clientDashboard.html', active_page='clientDashboard')
 
 @main.route('/agent_dashboard')
 @login_required
@@ -27,10 +27,6 @@ def agentDashboard():
 def landingpage():
     return render_template('landingpage.html', active_page='landingpage')
 
-@main.route('/booking')
-@login_required
-def booking():
-    return render_template('booking.html', active_page='booking')
 
 @main.route('/about')
 def about():
@@ -41,6 +37,22 @@ def about():
 def profile():
     return render_template('profile.html', active_page='profile')
 
+@main.route('/booking')
+@login_required
+def booking():
+    return render_template('booking.html', active_page='booking')
 
+@main.route('/payment')
+@login_required
+def payment():
+    username = request.args.get('username')
+    email = request.args.get('email')
+    telephone = request.args.get('telephone')
+    property_type = request.args.get('property_type')
+    booking_hours = request.args.get('booking_hours')
+    date = request.args.get('date')
+    return render_template('payment.html', active_page='payment', username=username, 
+                           email=email, telephone=telephone, property_type=property_type, 
+                           booking_hours=booking_hours, date=date)
 
 

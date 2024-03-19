@@ -12,8 +12,12 @@
 <body>
     <div class="header">
         <div class="logo">
-            <img src="/static/images/de30038bf36a1146441892552da72a4e.jpg" alt="Company Logo">
-            <span>Rowley Company</span>
+            <div class="logo-img">
+                <img src="/static/images/de30038bf36a1146441892552da72a4e.jpg" alt="Company Logo">
+            </div>
+            <div class"logo-text">
+                <span>Rowley Company</span>
+            </div>
         </div>
         <div class="nav">
             <a class="nav-item {{ 'active' if active_page == 'home' else '' }}"
@@ -31,8 +35,10 @@
                     <a class="nav-item {{ 'active' if active_page == 'agentDashboard' else '' }}"
                      href="{{ url_for('main.agentDashboard') }}"> Dashboard </a>
                 {% endif %}
-            <a class="nav-item {{ 'active' if active_page == 'dashboard' else '' }}" 
-                href="{{url_for('main.dashboard')}}"> Dashboard </a>
+                {% if current_user.role == 'client' %}
+                    <a class="nav-item {{ 'active' if active_page == 'clientDashboard' else '' }}" 
+                    href="{{url_for('main.clientDashboard')}}"> Dashboard </a>
+                {% endif %}
             <a class="nav-item {{ 'active' if active_page == 'profile' else '' }}" 
                 href="{{url_for('main.profile')}}"> Profile </a>
             <a class="nav-item {{ 'active' if active_page == 'logout' else '' }}" 

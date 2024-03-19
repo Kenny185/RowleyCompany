@@ -5,7 +5,8 @@
     padding: 20px 80px;
     width: 100%;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
+    height: calc(100vh-); 
 }
 .profile-form {
     max-width: 400px;
