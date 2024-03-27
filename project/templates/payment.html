@@ -9,62 +9,82 @@
 {% block content %}
 <section class="payment-section">
   <div class="search-section">
-    <!-- Display user details from booking.html here -->
-    <h2> Your Search </h2>
-    <!-- Add your user details display here -->
-      <div class="details">
-        <p><strong>Username:</strong> {{ username }}</p>
-        <p><strong>Email:</strong> {{ email }}</p>
-        <p><strong>Telephone:</strong> {{ telephone }}</p>
-        <p><strong>Property Type:</strong> {{ property_type }}</p>
-        <p><strong>Booking Hours:</strong> {{ booking_hours }}</p>
-        <p><strong>Date:</strong> {{ date }}</p>
-      </div>
-  </div>
-  <div class="table-section">
-    <table>
-      <tr>
-        <th>Premium</th>
-        <th>Classic</th>
-      </tr>
-      <tr>
-        <td>Ksh 1000</td>
-        <td>Ksh 500</td>
-      </tr>
-    </table>
-  </div>
-  <div class="payment-buttons">
-    <button class="continue-btn" onclick="showPaymentForm()">Continue with Payment</button>
-    <button class="cancel-btn" onclick="window.location.href='/scripts.js/cancelled.html'"> Cancel Booking Appointment </button>
-  </div>
-
-  <div class="payment-form">
-    <h2>Please enter your details</h2>
-    <form>
+    <div class="details">
+      <h2>Your Search</h2>
       <table>
         <tr>
-          <td>Full Name:</td>
-          <td><input type="text" pattern="[A-Za-z ]+" required></td>
+          <td class="data"><strong> Username </strong></td>
+          <td>{{ username }}</td>
         </tr>
         <tr>
-          <td>ID Number:</td>
-          <td><input type="text" pattern="[0-9]{8}" required></td>
+          <td class="data"><strong>Email </strong></td>
+          <td>{{ email }}</td>
         </tr>
         <tr>
-          <td>Service:</td>
-          <td>
-            <select name="service" required>
-              <option value="premium">Premium</option>
-              <option value="classic">Classic</option>
-            </select>
-          </td>
+          <td class="data"><strong>Telephone </strong></td>
+          <td>{{ telephone }}</td>
         </tr>
         <tr>
-          <td> M-Pesa Number:</td>
-          <td><input type="text" pattern="[0-9]{10}" required></td>
+          <td class="data"><strong>Property Type </strong></td>
+          <td>{{ property_type }}</td>
+        </tr>
+        <tr>
+          <td class="data"><strong>Booking Hours </strong></td>
+          <td>{{ booking_hours }}</td>
+        </tr>
+        <tr>
+          <td class="data"><strong>Date </strong></td>
+          <td>{{ date }}</td>
         </tr>
       </table>
-      <button type="button" onclick="proceedPayment()">Proceed</button>
+    </div>
+    <div class="table-section">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="notification is-danger">
+            {{ messages[0]|safe }}
+          </div>
+        {% endif %}
+      {% endwith %}
+      <h2> Booking Plans available </h2>
+      <table>
+        <tr>
+          <th>Premium</th>
+          <th>Classic</th>
+        </tr>
+        <tr>
+          <td>Ksh 1000</td>
+          <td>Ksh 500</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="payment-buttons">
+    <button class="continue-btn" onclick="showPaymentForm()"> Continue with Payment </button>
+    <button class="cancel-btn"  onclick="confirmCancellation()"> Cancel Booking Appointment </button>
+  </div>
+  <div class="payment-div">
+    <h3> Please enter your details </h3>
+    <form class="payment-form" action="/payment" method="POST">
+      <div class="payment-input">
+        <input type="text" name="full_name" placeholder="Full Name" pattern="[A-Za-z ]+" required>
+      </div>
+      <div class="payment-input">
+        <input type="text" name="id_number" placeholder="ID Number" pattern="[0-9]{8}" required>
+      </div>
+      <div class="payment-input">
+        <select name="service-type" required>
+          <option value="" disabled selected > Select Service </option>
+          <option value="premium"> Premium </option>
+          <option value="classic"> Classic </option>
+        </select>
+      </div>
+      <div class="payment-input">
+        <input type="text" name="mpesa_number" placeholder="Mpesa Number" pattern="[0-9]{10}" required>
+      </div>
+      <div class="payment-button">
+        <button class="button"> Proceed with Booking </button>
+      </div>
     </form>
   </div>
 </section>
@@ -82,12 +102,15 @@
     </div>
   </div>
 </section>
-
-  <script>
+<script>
     function showPaymentForm() {
-      document.querySelector('.payment-form').style.display = 'block';
+      document.querySelector('.payment-div').style.display = 'block';
     }
-
+    function confirmCancellation() {
+      if (confirm('Are you sure you want to cancel the booking appointment?')) {
+        window.location.href = '{{url_for('main.clientDashboard')}}';
+      }
+    }
     function proceedPayment() {
       // Add your logic for proceeding with payment here
       alert('Payment successful!'); // Example alert, replace with actual logic

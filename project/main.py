@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, request
-from flask_login import login_required, current_user 
+from flask import Blueprint, render_template, request, current_app
+from flask_login import login_required, current_user
+from itsdangerous import URLSafeSerializer 
 from . import db
 
 main = Blueprint('main', __name__)
@@ -45,12 +46,16 @@ def booking():
 @main.route('/payment')
 @login_required
 def payment():
-    username = request.args.get('username')
-    email = request.args.get('email')
-    telephone = request.args.get('telephone')
-    property_type = request.args.get('property_type')
-    booking_hours = request.args.get('booking_hours')
-    date = request.args.get('date')
+    app = current_app
+    serializer = URLSafeSerializer(app.config['SECRET_KEY'])
+    client_details = serializer.loads(request.args.get('client_details'))
+    
+    username = client_details['username']
+    email = client_details['email']
+    telephone = client_details['telephone']
+    property_type = client_details['property_type']
+    booking_hours = client_details['booking_hours']
+    date = client_details['date']
     return render_template('payment.html', active_page='payment', username=username, 
                            email=email, telephone=telephone, property_type=property_type, 
                            booking_hours=booking_hours, date=date)

@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash, session
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session, current_app
+from itsdangerous import URLSafeSerializer
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User, Booking
+from .models import Payment, User, Booking
 from . import db
 from datetime import datetime
 from flask_login import login_user, login_required, logout_user, current_user 
@@ -84,30 +85,6 @@ def agentLogin_post():
     login_user(user, remember=remember)
     return redirect(url_for('main.agentDashboard'))
 
-@auth.route('/client_login')
-def clientLogin():
-    return render_template('clientLogin.html', active_page='login')
-
-@auth.route('/client_login', methods=['POST'])
-def client_login_post():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    remember = True if request.form.get('remember') else False
-    if not email or not password:
-        flash('Please check your details')
-        return redirect(url_for('auth.clientLogin'))
-    
-    user = User.query.filter_by(email=email).first()
-    # check if the user actually exists
-    # take the user-supplied password, hash it, and compare it to the hashed password in the database
-    if not user or not check_password_hash(user.password, password)or user.role != 'client':
-        flash('Please check your login details and try again.')
-        return redirect(url_for('auth.clientLogin'))    
-    # if the user doesn't exist or password is wrong, reload the page
-    # if the above check passes, then we know the user has the right credentials
-    login_user(user, remember=remember)
-    return redirect(url_for('main.profile'))
-
 @auth.route('/profile', methods=['POST'])
 @login_required
 def update_profile():
@@ -136,21 +113,47 @@ def booking_post():
         booking_hours = request.form['booking-hours']
         date = request.form['date']
         
+        app = current_app        
+        serializer = URLSafeSerializer(app.config['SECRET_KEY'])
+        client_details = serializer.dumps({'username': username, 'email': email, 'telephone': telephone, 'property_type': property_type, 'booking_hours': booking_hours, 'date': date})
+        
         new_booking = Booking(username=username, email=email, telephone=telephone,
                               property_type=property_type, booking_hours=booking_hours, date=date,
                               user_id=current_user.id)
         
         db.session.add(new_booking)
         db.session.commit()
-        flash('Your booking has been successful! <a href="' + url_for('main.payment', 
-                username=username, email=email, telephone=telephone, property_type=property_type, booking_hours=booking_hours, date=date)
-              + '"> Click to Proceed to payment </a>', 'success')
         
-    return render_template('booking.html')   
+        payment_url = url_for('main.payment', client_details=client_details)
+        
+        flash('Your booking has been successful! <a href="' + payment_url + '"> Click to Proceed to payment </a>', 'success')
+        
+    return render_template('booking.html') 
+
+@auth.route('/payment', methods=['POST'])
+@login_required
+def payment_post():
+    full_name = request.form['full_name']
+    id_number = request.form['id_number']
+    service_type = request.form['service-type']
+    mpesa_number = request.form['mpesa_number']
+    
+    new_payment = Payment(full_name=full_name, id_number=id_number, 
+                          service_type=service_type, mpesa_number=mpesa_number,
+                          user_id=current_user.id)
+    db.session.add(new_payment)
+    db.session.commit()
+    
+    flash('Your payment has been successful', 'success')
+    
+    return render_template('payment.html')
+      
+    
     
 
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
+    session.pop('user_id', None)
     return redirect(url_for('main.index'))
