@@ -8,15 +8,15 @@
 {% block content %}
 <section class="signup-section">
     <div class="signup-container">
-        <h2>Sign Up</h2>
         <form class="signup-form" action="/signup" method="POST">
             {% with messages = get_flashed_messages() %}
             {% if messages %}
-              <div class="notification is-danger">
-                  {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
-              </div>
+            <div class="notification is-danger">
+                {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+            </div>
             {% endif %}
             {% endwith %}
+            <h2>Sign Up</h2>
             <input type="text" name="surname" placeholder="Surname" pattern="[A-Za-z]+" required>
             <input type="text" name="first_name" placeholder="First Name" pattern="[A-Za-z]+" required>
             <input type="text" name="second_name" placeholder="Second Name" pattern="[A-Za-z]+" required>

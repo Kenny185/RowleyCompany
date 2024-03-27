@@ -14,9 +14,23 @@
     </div>
   </div>
   <div class="middle-part">
-    <div class="Reports-part">
-
-
+    <div class="reports-part">
+      <h1> Reports </h1>
+      <div class="report-div">
+        <button class="report-data" onclick="generateReport('{{ url_for('reports.clients_report') }}', 'clients')">
+            Clients Report
+        </button>
+      </div> 
+      <div class="report-div">
+        <button class="report-data" onclick="generateReport('{{ url_for('reports.booking_report') }}', 'bookings')">
+          Booking Report
+        </button>
+      </div>
+      <div class="report-div">
+        <button class="report-data" onclick="generateReport('{{ url_for('reports.payment_report') }}', 'payments')">
+          Payment Report
+        </button>
+      </div>
 
     </div>    
     <div class="form-part">                
@@ -37,5 +51,76 @@
     </div>
   </div>
 <section>
+<script>
+  function generateReport(reportUrl, reportType) {
+    // Open a new tab
+    var reportWindow = window.open('', '_blank');
+    // Make an AJAX request to fetch the report data
+    fetch(reportUrl)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Log the data received from the server
 
+            // Dynamically create an HTML table with the report data
+            var table = '<table class="report-table">';
+            table += '<tr>';
+            // Define headers based on report type
+            var headers = [];
+            if (reportType === 'clients') {
+                headers = ['Surname', 'First_name', 'Second_name', 'Telephone', 'Email'];
+            } else if (reportType === 'bookings') {
+                headers = ['Username', 'Email', 'Telephone', 'Property_type', 'Booking_hours', 'Date'];
+            } else if (reportType === 'payments') {
+                headers = ['Full_name', 'Id_number', 'Service_type', 'Mpesa_number'];
+            }
+
+            headers.forEach(header => {
+                table += `<th class="table-header">${header}</th>`;
+            });
+            table += '</tr>';
+            // Populate table rows with data
+            data.forEach((item, index) => {
+                table += `<tr class="table-row">`;
+                // Ensure the data is placed in the correct columns
+                headers.forEach(header => {
+                    table += `<td class="table-data">${item[header]}</td>`;
+                });
+                table += '</tr>'; // Move this line inside the forEach loop
+            });
+            table += '</table>';
+            // Create a container for the table and download button
+            var container = document.createElement('div');
+            container.classList.add('report-container'); // Add a class for additional styling if needed
+            // Set the HTML content of the new tab to display the table
+            container.innerHTML = `
+              <div class="report-header">
+                <div class="report-logo">
+                  <img src="/static/images/de30038bf36a1146441892552da72a4e.jpg" alt="Company Logo">
+                  <h2> Rowley Company </h2>
+                </div>
+              <div class="report-heading">
+                <h1>${reportType} Report</h1>
+              </div>
+            </div>
+            <link rel="stylesheet" href="/static/css/reports.css"> 
+            ${table}
+            `;
+            // Add a button to download the report as PDF
+            var downloadButton = document.createElement('button');
+            downloadButton.textContent = 'Download';
+            downloadButton.classList.add('download-button');
+            downloadButton.onclick = function() {
+                downloadPDF(reportType);
+            };
+            container.appendChild(downloadButton);
+            // Append the container to the body of the new tab
+            reportWindow.document.body.appendChild(container);
+        })
+        .catch(error => console.error('Error fetching report:', error));
+}
+ function downloadPDF(reportType) {
+    // Make a request to download the PDF report
+      window.open(`/reports/generate_pdf/${reportType}`, '_blank');
+  }
+</script>
 {% endblock %}

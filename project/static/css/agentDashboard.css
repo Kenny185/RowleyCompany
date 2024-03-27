@@ -36,6 +36,25 @@ body {
     flex-direction: row;
     height: 100vh;
 }
+.reports-part {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto auto 50px;
+}
+.report-div {
+    margin-bottom: 15px;
+}
+.report-div button{
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+}
+.report-div button:hover {
+    background-color: rgb(41, 57, 194);;
+
+}
 .form-part {
     padding: 30px;
     justify-content: space-around;

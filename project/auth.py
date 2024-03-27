@@ -146,10 +146,7 @@ def payment_post():
     
     flash('Your payment has been successful', 'success')
     
-    return render_template('payment.html')
-      
-    
-    
+    return render_template('payment.html')    
 
 @auth.route('/logout')
 @login_required
