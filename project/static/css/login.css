@@ -35,6 +35,7 @@
 .input-field input:focus{
   outline: none;
   border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255,.25);
 }
 ::placeholder{
   color: #666;
@@ -91,7 +92,8 @@
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 }
-.login-button button:hover{
+.login-button button:hover, 
+.login-button button:focus{
   background-color: #0056b3;
 }
 .signup-link {

@@ -2,59 +2,71 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/static/images/townHouse.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
     
 }
 .signup-container {
-    display: flex;
-    flex-direction: column;
-    color: gold;
-    padding: 20px;
-    text-align: center;
-    align-items: center;
-    background-image: url('/static/images/townHouse.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100%; 
+    color: #fff;
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 20px;
     
 }
 
 .signup-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 350px;
-    padding: 15px;
-    border: 2px solid;
-    border-radius: 20px;
+    align-items: stretch;
 }
 .signup-form h2{
     color: black;
+    margin-bottom: 20px;
+    text-align: center;
 }
 .signup-form input,
-.signup-form select {
-    width: 100%;
+.signup-form select,
+.signup-form button {
     padding: 10px;
     margin-bottom: 10px;
-}
-.footer {
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    background-color: maroon;
-    color: gold;
-    display: flex;
-    flex-direction: column;
-    margin-top: auto;
-    position: relative;
-    bottom: 0;
-
-}
-.contact-us {
-    margin-bottom: 20px;
-}
-.contact-us p{
-    margin-bottom: 5px;
-}
-.welcome {
+    border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 15px;
+    background: #fff;
+}
+.signup-form button {
+    color: #fff;
+    background-color: #0056b3;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out; 
+}
+.signup-form button:hover, 
+.signup-form button:hover {
+    background-color: #003d82;
+}
+.signup-form input::placeholder,
+.signup-form select {
+    color: #666;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .signup-container {
+        width: 90%;
+        padding: 20px; 
+    }
+    .signup-form {
+        width: 100%; 
+    }
+
 }
