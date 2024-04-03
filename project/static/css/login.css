@@ -1,35 +1,43 @@
   .login-container {
-    background-color: rgb(5, 5, 92);
-    padding: 20px 80px;
+    background-color: #E1E9E5;
+    /* padding: 20px 80px; */
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;    
+    justify-content: center;
+    align-items: center;    
   }
   .login-form {
-    padding: 20px;
-    border: 2px solid gold;
+    padding: 40px;
+    background: white;
     border-radius: 10px;
-    width: 350px;
-    height: 500px;    
+    max-width: 400px;
+    width: 100%;
+    box-sizing: border-box; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0,1);   
   }
   .login-form h2{
-    padding: 5px;
     text-align: center;
     border-radius: 2px;
-    color: chartreuse;
+    margin-bottom: 20px;
+}
+.input-field {
+  position: relative;
+  margin-bottom: 20px;
 }
   .input-field input{
-    padding: 22px 15px 10px 0;
-    margin-top: 23px;
-    border: none;
-    border-bottom: 2px solid rgb(41, 57, 194);
-    background: transparent;
-    font-size: 15px;    
+    padding: 10px 15px;
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    border-radius: 4px;    
+}
+.input-field input:focus{
+  outline: none;
+  border-color: #007bff;
 }
 ::placeholder{
-  font-size: 14px;
-  color: gray;
+  color: #666;
   text-align: center;
 }
 .input-field input[type="email"],
@@ -42,13 +50,14 @@
     text-align: center;
 }
 .forgot{
-  margin: 0  0 28px 0;
+  text-align: right;
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
+
 }
 .forgot a{
   text-decoration: none;
-  font-size: 13px;
+  font-size: 14px;
 }
 .field{
   font-size: 15px;
@@ -73,21 +82,35 @@
 .login-button button{
     width: 100%;
     color: black;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
-    padding: 10px;
+    padding: 15px;
     background-color: gold;
     border: none;
     border-radius: 70px;
     cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+.login-button button:hover{
+  background-color: #0056b3;
 }
 .signup-link {
-    margin-top: 10px;
+    margin-top: 20px;
     text-align: center;
-    font-size: 14px;
+    font-size: 15px;
   }
 .signup-link a{
     text-decoration: none;
     font-size: 14px;
     color: blue;
+    font-weight: bold;
+}
+@media (max-width: 768px) {
+  .login-container {
+      padding: 20px;
+  }
+  
+  .login-form {
+      padding: 30px;
+  }
 }

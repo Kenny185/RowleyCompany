@@ -6,28 +6,106 @@
   <title> Rowley Company - Real Estate Management </title>   
 {% endblock %}
 {% block content %}
-    <div class="banner">
-        <h2>Goals and Objectives</h2>
-        <ul class="goals">
-            <li>To be a leading real estate management company.</li>
-            <li>To treat every customer as the sole owner of their property.</li>
-            <li>To seek continuous growth and development of the company.</li>
-            <li>To have a loyal and highly satisfied customer following.</li>
-            <li>To continually research and fully meet changing customer needs.</li>
-            <li>To invest in staff development through training and good compensation.</li>
-            <li>To continually develop new and improve existing services.</li>
-        </ul>
+<section>
+    <div class="intro">
+        <h2> Welcome to Rowley Company </h2>
+        <p>We are a trusted partner in real estate management, dedicated to providing exceptional service and value to our clients.</p>
+    </div>
+    <div class="featured-properties">
+        <h2><strong> Featured Properties </strong></h2>
+        <div class="property-section">
+            <div class="property">
+                <img src="/static/images/townHouse.jpg" alt="Property" loading="lazy">
+                <p> Beautiful 3-bedroom house in the heart of the city. Spacious and modern design. </p>
+            </div>
+            <div class="property">
+                <img src="/static/images/singleFamilyHouse.jpg" alt="Property" loading="lazy">
+                <p> Stunning villa with breathtaking views. Luxury living at its finest. </p>
+            </div>
+            <div class="property">
+                <img src="/static/images/apartment2.jpg" alt="Property" loading="lazy">
+                <p> Spacious apartment room with ample space to live and work. Featuring stylish decor, designer finishes and premium amenities. </p>
+            </div>
+        </div>
+    </div>
+    <div class="testimonials-section">
+        <h2> Clients Testimonials </h2>
+        <div class="testimonials">
+            <div class="testimonial-card">
+                <div class="box-top">
+                    <div class="profile">
+                        <div class="profile-img">
+                            <img src="images/c-1.jpg" />
+                        </div>
+                        <div class="name-user">
+                            <strong> James Peter </strong>
+                            <span> @JPeter </span>
+                        </div>
+                    </div>
+                    <div class="reviews">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i><!--Empty star-->
+                    </div>
+                </div>
+                <div class="client-comment">
+                    <p> Rowley Company helped me find my dream home. Their professionalism and attention to detail made the process seamless. </p>
+                </div> 
+            </div>      
+            <div class="testimonial-card">
+                <div class="box-top">
+                    <div class="profile">
+                        <div class="profile-img">
+                            <img src="images/c-1.jpg" />
+                        </div>
+                        <div class="name-user">
+                            <strong> Gloria Njagi </strong>
+                            <span> @Njagi254 </span>
+                        </div>
+                    </div>
+                    <div class="reviews">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="client-comment">
+                <p> I highly recommend Rowley Company to anyone looking to buy or sell property. Their expertise is unmatched. </p>
+                </div> 
+            </div>
+        </div>
     </div>
     <div class="footer">
-        <div class="contact-us">
-            <p>Contact us:</p>
-            <p>Phone: +254783756937</p>
-            <p>Email: waiyegondungu@gmail.com</p>
-            <p>Location: Pacan Suites opposite Murang'a Creameries</p>
-            <p>Postal Address: 68 Kangema</p>
+        <div class="contact-info">
+            <h3> Contact Us </h3>
+            <p><i class="fa-solid fa-phone"></i> +254783756937</p>
+            <p><i class="fa-solid fa-envelope"></i>  waiyegondungu@gmail.com</p>
+            <p><i class="fa-solid fa-location-dot"></i>  Pacan Suites opposite Murang'a Creameries</p>
+            <p><i class="fa-solid fa-mailbox"></i> 68 Kangema</p>
         </div>
-        <div class="welcome">
-            <h2>Welcome to Rowley Company - Your Trusted Partner in Real Estate Management</h2>
+        <div class="quick-links">
+            <h3> Quick Links </h3>
+            <ul>
+                <li><a href="{{url_for('main.about')}}"> About Us </a></li>
+                <li><a href="{{url_for('auth.login')}}"> Login </a></li>
+            </ul>
+        </div>
+        <div class="social-media">
+            <h3> Follow Us </h3>
+            <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/i/flow/login"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.instagram.com/accounts/login/"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/login"><i class="fa fa-linkedin"></i></a>
+        </div>
+        <div class="signup-link">
+            <h3> Sign Up</h3>
+            <p> Join us today for exclusive deals and updates! </p>
+            <a href="{{url_for('auth.signup')}}"> Sign Up Now </a>
         </div>
     </div>
+</section>
 {% endblock %}
