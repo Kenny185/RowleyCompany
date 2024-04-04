@@ -76,25 +76,3 @@ form h1{
     border-color: #555;
     outline: none;
 }
-
-.footer {
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    background-color: maroon;
-    color: gold;
-    display: flex;
-    flex-direction: column;
-    margin-top: auto;
-    position: relative;
-
-}
-.contact-us {
-    margin-bottom: 20px;
-}
-.contact-us p{
-    margin-bottom: 5px;
-}
-.welcome {
-    font-size: 15px;
-}

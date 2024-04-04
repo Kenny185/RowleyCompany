@@ -17,9 +17,27 @@
            </div>
         </div>
         <div class="middle-part">
-            <div class="image-part">
-                <img src="/static/images/Capture.PNG" alt="House">
-            </div>
+            <div class="bookings-part">
+                <h2> Your Bookings </h2>
+                {% for booking in bookings %}
+                <div class="booking-card">
+                    <div class="booking-detail">
+                        <h3> Property: {{ booking.property_type }} </h3>
+                        <p> Booked for: <strong> {{ booking.booking_hours}}  {{ booking.date }} </strong></p>
+                    </div>
+                    <div class="booking-actions">
+                        <button> Modify </button>
+                        <button> Delete </button>
+                    </div>
+                    <div class="booking-actions">
+                        <button onclick="location.href='{{ url_for('auth.proceed_to_payment', booking_id=booking.id) }}'"> Proceed to Payment </button>
+                    </div>
+                </div>
+                {% else %}
+                <p>No bookings found.</p>
+                {% endfor %}
+                <!-- Add more booking cards as needed -->
+            </div>            
             <div class="form-part">                
                 <div class="form-card">
                     <h2> Profile </h2>

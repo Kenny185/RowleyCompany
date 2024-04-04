@@ -113,10 +113,6 @@ def booking_post():
         booking_hours = request.form['booking-hours']
         date = request.form['date']
         
-        app = current_app        
-        serializer = URLSafeSerializer(app.config['SECRET_KEY'])
-        client_details = serializer.dumps({'username': username, 'email': email, 'telephone': telephone, 'property_type': property_type, 'booking_hours': booking_hours, 'date': date})
-        
         new_booking = Booking(username=username, email=email, telephone=telephone,
                               property_type=property_type, booking_hours=booking_hours, date=date,
                               user_id=current_user.id)
@@ -124,9 +120,7 @@ def booking_post():
         db.session.add(new_booking)
         db.session.commit()
         
-        payment_url = url_for('main.payment', client_details=client_details)
-        
-        flash('Your booking has been successful! <a href="' + payment_url + '"> Click to Proceed to payment </a>', 'success')
+        flash('Your booking has been successful! <a href="' + url_for('main.clientDashboard') + '"> Click to Return to Dashboard </a>', 'success')
         
     return render_template('booking.html') 
 
@@ -146,7 +140,14 @@ def payment_post():
     
     flash('Your payment has been successful', 'success')
     
-    return render_template('payment.html')    
+    return render_template('payment.html') 
+
+@auth.route('/proceed_to_payment/<int:booking_id>')
+@login_required
+def proceed_to_payment(booking_id):
+    booking = Booking.query.filter_by(id=booking_id, user_id=current_user.id).first_or_404()
+    return render_template('payment.html', booking=booking)
+   
 
 @auth.route('/logout')
 @login_required

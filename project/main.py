@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, current_app
 from flask_login import login_required, current_user
-from itsdangerous import URLSafeSerializer 
+from itsdangerous import URLSafeSerializer
+from project.models import Booking 
 from . import db
 
 main = Blueprint('main', __name__)
@@ -16,7 +17,8 @@ def home():
 @main.route('/client_dashboard')
 @login_required
 def clientDashboard():
-    return render_template('clientDashboard.html', active_page='clientDashboard')
+    bookings = Booking.query.filter_by(user_id=current_user.id).all()
+    return render_template('clientDashboard.html', active_page='clientDashboard', bookings=bookings)
 
 @main.route('/agent_dashboard')
 @login_required
@@ -45,19 +47,7 @@ def booking():
 
 @main.route('/payment')
 @login_required
-def payment():
-    app = current_app
-    serializer = URLSafeSerializer(app.config['SECRET_KEY'])
-    client_details = serializer.loads(request.args.get('client_details'))
-    
-    username = client_details['username']
-    email = client_details['email']
-    telephone = client_details['telephone']
-    property_type = client_details['property_type']
-    booking_hours = client_details['booking_hours']
-    date = client_details['date']
-    return render_template('payment.html', active_page='payment', username=username, 
-                           email=email, telephone=telephone, property_type=property_type, 
-                           booking_hours=booking_hours, date=date)
+def payment():    
+    return render_template('payment.html', active_page='payment')
 
 

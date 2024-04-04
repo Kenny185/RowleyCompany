@@ -4,39 +4,40 @@
   {{super()}}
   <link rel="stylesheet" href="/static/css/payment.css">
   <title>Rowley Company - Real Estate Management</title>
-
 {% endblock %}
 {% block content %}
 <section class="payment-section">
   <div class="search-section">
     <div class="details">
-      <h2>Your Search</h2>
-      <table>
-        <tr>
-          <td class="data"><strong> Username </strong></td>
-          <td>{{ username }}</td>
-        </tr>
-        <tr>
-          <td class="data"><strong>Email </strong></td>
-          <td>{{ email }}</td>
-        </tr>
-        <tr>
-          <td class="data"><strong>Telephone </strong></td>
-          <td>{{ telephone }}</td>
-        </tr>
-        <tr>
-          <td class="data"><strong>Property Type </strong></td>
-          <td>{{ property_type }}</td>
-        </tr>
-        <tr>
-          <td class="data"><strong>Booking Hours </strong></td>
-          <td>{{ booking_hours }}</td>
-        </tr>
-        <tr>
-          <td class="data"><strong>Date </strong></td>
-          <td>{{ date }}</td>
-        </tr>
-      </table>
+      <h2> Booking details </h2>
+      <div class="details-data">
+        <table>
+          <tr>
+            <td class="data"><strong> Username </strong></td>
+            <td>{{ booking.username }}</td>
+          </tr>
+          <tr>
+            <td class="data"><strong>Email </strong></td>
+            <td>{{ booking.email }}</td>
+          </tr>
+          <tr>
+            <td class="data"><strong>Telephone </strong></td>
+            <td>{{ booking.telephone }}</td>
+          </tr>
+          <tr>
+            <td class="data"><strong>Property Type </strong></td>
+            <td>{{ booking.property_type }}</td>
+          </tr>
+          <tr>
+            <td class="data"><strong>Booking Hours </strong></td>
+              <td>{{ booking.booking_hours }}</td>
+          </tr>
+          <tr>
+            <td class="data"><strong>Date </strong></td>
+            <td>{{ booking.date }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
     <div class="table-section">
       {% with messages = get_flashed_messages(with_categories=true) %}
@@ -88,20 +89,6 @@
         <button class="button"> Proceed with Booking </button>
       </div>
     </form>
-  </div>
-</section>
-<section class="footer-section">
-  <div class="footer">
-    <div class="contact-us">
-        <p>Contact us:</p>
-        <p>Phone: +254783756937</p>
-        <p>Email: waiyegondungu@gmail.com</p>
-        <p>Location: Pacan Suites opposite Murang'a Creameries</p>
-        <p>Postal Address: 68 Kangema</p>
-    </div>
-    <div class="welcome">
-      &copy; 2024 Rowley Company. All rights reserved.
-    </div>
   </div>
 </section>
 <script>
