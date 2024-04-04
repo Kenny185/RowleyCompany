@@ -1,10 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash, session, current_app
-from itsdangerous import URLSafeSerializer
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import Payment, User, Booking
+from .models import User
 from . import db
-from datetime import datetime
-from flask_login import login_user, login_required, logout_user, current_user 
+from flask_login import login_user, login_required, logout_user 
 
 auth = Blueprint('auth', __name__)
 
@@ -84,70 +82,6 @@ def agentLogin_post():
   
     login_user(user, remember=remember)
     return redirect(url_for('main.agentDashboard'))
-
-@auth.route('/profile', methods=['POST'])
-@login_required
-def update_profile():
-    user_id = session.get('user_id')
-    user = User.query.get(user_id)
-    if user:
-        user.surname = request.form['surname']
-        user.first_name = request.form['first_name']
-        user.second_name = request.form['second_name']
-        user.telephone = request.form['telephone']
-        user.email = request.form['email']
-        # user.password = request.form['password']
-        db.session.commit()
-        flash('Your profile has been updated successfully!', 'success')
-            
-        return redirect(url_for('main.profile', user_id=user_id))
- 
-@auth.route('/booking', methods=['POST'])
-@login_required
-def booking_post():
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        telephone = request.form['telephone']
-        property_type = request.form['property-type']
-        booking_hours = request.form['booking-hours']
-        date = request.form['date']
-        
-        new_booking = Booking(username=username, email=email, telephone=telephone,
-                              property_type=property_type, booking_hours=booking_hours, date=date,
-                              user_id=current_user.id)
-        
-        db.session.add(new_booking)
-        db.session.commit()
-        
-        flash('Your booking has been successful! <a href="' + url_for('main.clientDashboard') + '"> Click to Return to Dashboard </a>', 'success')
-        
-    return render_template('booking.html') 
-
-@auth.route('/payment', methods=['POST'])
-@login_required
-def payment_post():
-    full_name = request.form['full_name']
-    id_number = request.form['id_number']
-    service_type = request.form['service-type']
-    mpesa_number = request.form['mpesa_number']
-    
-    new_payment = Payment(full_name=full_name, id_number=id_number, 
-                          service_type=service_type, mpesa_number=mpesa_number,
-                          user_id=current_user.id)
-    db.session.add(new_payment)
-    db.session.commit()
-    
-    flash('Your payment has been successful', 'success')
-    
-    return render_template('payment.html') 
-
-@auth.route('/proceed_to_payment/<int:booking_id>')
-@login_required
-def proceed_to_payment(booking_id):
-    booking = Booking.query.filter_by(id=booking_id, user_id=current_user.id).first_or_404()
-    return render_template('payment.html', booking=booking)
-   
 
 @auth.route('/logout')
 @login_required

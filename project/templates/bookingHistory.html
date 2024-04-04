@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %} Rowley Company - Booking History {% endblock %}
+{% block head %}
+  {{super()}}
+  <link rel="stylesheet" href="/static/css/bookingHistory.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <title>Rowley Company - Booking History </title>
+{% endblock %}
+{% block content %}
+<div>
+    <h2> Booking History </h2>
+    <form action="{{ url_for('client.bookingHistory') }}" method="get">
+        <select name="property_type">
+            <option value="">Select Property Type</option>
+            <option value="apartment">Apartment</option>
+            <option value="townhouse">Townhouse</option>
+            <option value="single-family-home">Single Family Home</option>
+        </select>
+        <input type="text" id="start_date" name="start_date" placeholder="Start Date">
+        <input type="text" id="end_date" name="end_date" placeholder="End Date">
+        <button type="submit">Filter</button>
+    </form>
+    {% if bookings %}
+        {% for booking in bookings %}
+        <div class="booking">
+            <p>Username: {{ booking.username }}</p>
+            <p>Email: {{ booking.email }}</p>
+            <p>Telephone: {{ booking.telephone }}</p>
+            <p>Property Type: {{ booking.property_type }}</p>
+            <p>Booking Hours: {{ booking.booking_hours }}</p>
+            <p>Date: {{ booking.date }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p> No bookings found. </p>
+    {% endif %}
+</div>
+<script>
+    $(function() {
+        $("#start_date").datepicker({
+            dateFormat: "dd/mm/yy", // Change this to match your backend date format
+            onClose: function(selectedDate) {
+            // Ensure the end date is after the start date
+                $("#end_date").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#end_date").datepicker({
+            dateFormat: "dd/mm/yy", // Change this to match your backend date format
+            onClose: function(selectedDate) {
+            // Ensure the start date is before the end date
+                $("#start_date").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+    });
+</script>    
+{% endblock %}

@@ -3,6 +3,9 @@
 {% block head %}
   {{super()}}
   <link rel="stylesheet" href="/static/css/dashboard.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <title> Rowley Company - Client Dashboard </title>   
 {% endblock %}
 {% block content %}
@@ -13,9 +16,18 @@
                 <a  href="{{url_for('main.landingpage')}}"> Rowley Company Overview </a>
             </div>
             <div class="agent-btn">
-                <a href="{{url_for('auth.agentLogin')}}"><button> Login as a Agent</button></a>
+                <a href="{{url_for('auth.agentLogin')}}"><button><i class="fas fa-sign-in-alt"></i> Login as a Agent</button></a>
            </div>
         </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div id="alert" class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
         <div class="middle-part">
             <div class="bookings-part">
                 <h2> Your Bookings </h2>
@@ -26,35 +38,90 @@
                         <p> Booked for: <strong> {{ booking.booking_hours}}  {{ booking.date }} </strong></p>
                     </div>
                     <div class="booking-actions">
-                        <button> Modify </button>
-                        <button> Delete </button>
+                        <button class="modify-btn" onclick="showModifyForm('{{ booking.id }}')"> Modify </button>
+                        <form action="{{ url_for('client.delete_booking', booking_id=booking.id)}}" method="post" onsubmit="return confirmDelete()">
+                            <button type="submit"> Delete </button>
+                        </form>
+
+                        <div id="modify-form-overlay-{{ booking.id }}" class="modify-form-overlay" 
+                            onclick="hideModifyForm('{{ booking.id }}')">
+                            <div class="modify-div" onclick="event.stopPropagation();">
+                                <button onclick="hideModifyForm('{{ booking.id }}')" class="close-btn"> X </button>
+                                <form class="modify-form" action="{{ url_for('client.modify_booking', booking_id=booking.id) }}" method="POST">
+                                    <input type="text" name="username" value="{{ booking.username }}" required>
+                                    <input type="email" name="email" value="{{ booking.email }}" required>
+                                    <input type="tel" name="telephone" value="{{ booking.telephone }}" required>
+                                    <select name="property-type" required>
+                                        <option value="" disabled> Select Property Type </option>
+                                        <option value="apartment" {{ 'selected' if booking.property_type == 'apartment' else '' }}>Apartment</option>
+                                        <option value="townhouse" {{ 'selected' if booking.property_type == 'townhouse' else '' }}>Town House</option>
+                                        <option value="single-family-home" {{ 'selected' if booking.property_type == 'single-family-home' else '' }}>Single Family Home</option>
+                                    </select>
+                                    <select name="booking-hours"  required>
+                                        <option value="" disabled selected > Choose Booking Hours</option>
+                                        <option value="7:00am" {{ 'selected' if booking.booking_hours == '7:00am' else '' }}> 7:00am </option>
+                                        <option value="11:00am" {{ 'selected' if booking.booking_hours == '11:00am' else '' }}> 11:00am </option>
+                                        <option value="2:00pm" {{ 'selected' if booking.booking_hours == '2:00pm' else '' }}> 2:00pm </option>
+                                        <option value="4:00pm" {{ 'selected' if booking.booking_hours == '4:00pm' else '' }}> 4:00pm </option>
+                                        <option value="5:30pm" {{ 'selected' if booking.booking_hours == '5:30pm' else '' }}> 5:30pm </option>
+                                    </select>
+                                    <input type="text" name="date" id="datepicker-{{ booking.id }}" value="{{ booking.date }}" required>
+                                    <button type="submit"> Submit Changes</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="booking-actions">
-                        <button onclick="location.href='{{ url_for('auth.proceed_to_payment', booking_id=booking.id) }}'"> Proceed to Payment </button>
+                        <button onclick="location.href='{{ url_for('client.proceed_to_payment', booking_id=booking.id) }}'"> Proceed to Payment </button>
                     </div>
                 </div>
                 {% else %}
-                <p>No bookings found.</p>
+                <p> No bookings found.</p>
                 {% endfor %}
-                <!-- Add more booking cards as needed -->
             </div>            
-            <div class="form-part">                
-                <div class="form-card">
-                    <h2> Profile </h2>
-                    <p> To manage you account information </p>
-                    <form action="{{ url_for('main.profile') }}">
-                        <button type="submit"> Click here </button>
-                    </form>
-                </div>
+            <div class="form-part">
                 <div class="form-card">
                     <h2> Booking </h2>
                     <p> To secure one of our spaces  </p>
                     <form action="{{ url_for('main.booking') }}">
                         <button type="submit"> Click here </button>
                     </form>
-                </div>   
+                </div>                
+                <div class="form-card">
+                    <h2> Booking History </h2>
+                    <p> To view booking history </p>
+                    <form action="{{ url_for('client.bookingHistory') }}">
+                        <button type="submit"> Click here </button>
+                    </form>
+                </div>                   
             </div>
         </div>
     <section>
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this booking?");
+        }
+        function showModifyForm(bookingId) {
+            var overlayId = "modify-form-overlay-" + bookingId;
+            var overlay = document.getElementById(overlayId);
+            overlay.style.display = "flex"; // Use flex to center the form
+        }
+        
+        function hideModifyForm(bookingId) {
+            var overlayId = "modify-form-overlay-" + bookingId;
+            var overlay = document.getElementById(overlayId);
+            overlay.style.display = "none";
+        }
+        $(function() {
+            // Assuming booking.date is already formatted as "dd/mm/yy"
+            {% for booking in bookings %}
+            $("#datepicker-{{ booking.id }}").datepicker({
+                dateFormat: "dd/mm/yy",
+                minDate: +1
+            });
+            {% endfor %}
+        });       
+    </script>
+            
                 
 {% endblock %}

@@ -44,4 +44,8 @@ def create_app():
     from .reports import reports as reports_blueprint
     app.register_blueprint(reports_blueprint)
 
+    # blueprint for reports routes 
+    from .client import client as client_blueprint
+    app.register_blueprint(client_blueprint)
+    
     return app

@@ -40,20 +40,11 @@
       </div>
     </div>
     <div class="table-section">
-      {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          {% for category, message in messages %}
-            <div id="alert" class="alert alert-{{ category }}">
-              {{ message }}
-            </div>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
       <h2> Booking Plans available </h2>
       <table>
         <tr>
-          <th>Premium</th>
-          <th>Classic</th>
+          <th> Premium </th>
+          <th> Classic </th>
         </tr>
         <tr>
           <td>Ksh 1000</td>
@@ -105,11 +96,5 @@
       alert('Payment successful!'); // Example alert, replace with actual logic
       window.location.href = 'proceed_payment_page.html';
     }
-    setTimeout(function() {
-      var alertDiv = document.getElementById('alert');
-        if (alertDiv) {
-          alertDiv.remove();
-        }
-    }, 5000);
   </script>
 {% endblock %}

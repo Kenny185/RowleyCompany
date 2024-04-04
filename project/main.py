@@ -1,3 +1,4 @@
+import datetime
 from flask import Blueprint, render_template, request, current_app
 from flask_login import login_required, current_user
 from itsdangerous import URLSafeSerializer
@@ -49,5 +50,3 @@ def booking():
 @login_required
 def payment():    
     return render_template('payment.html', active_page='payment')
-
-
