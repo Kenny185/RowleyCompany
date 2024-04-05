@@ -33,7 +33,7 @@ class Booking(db.Model):
     telephone = db.Column(db.String(10), nullable=False)
     property_type = db.Column(db.String(50), nullable=False)
     booking_hours = db.Column(db.String(50), nullable=False)
-    date = db.Column(db.String(50), nullable=False)
+    date = db.Column(db.Date, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):

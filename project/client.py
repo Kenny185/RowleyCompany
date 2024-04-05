@@ -1,8 +1,8 @@
-import datetime
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 from flask_login import current_user, login_required
 from . import db
 from project.models import Booking, Payment, User
+from datetime import datetime
 
 client = Blueprint('client',  __name__)
 
@@ -34,8 +34,7 @@ def booking_post():
         booking_hours = request.form['booking-hours']
         
         date_str = request.form['date']
-        date_obj = datetime.datetime.strptime(date_str, '%d/%m/%Y')
-        date = date_obj.strftime('%Y-%m-%d')
+        date = datetime.strptime(date_str, '%d/%m/%Y').date()
         
         new_booking = Booking(username=username, email=email, telephone=telephone,
                               property_type=property_type, booking_hours=booking_hours, date=date,
@@ -44,7 +43,8 @@ def booking_post():
         db.session.add(new_booking)
         db.session.commit()
         
-        flash('Your booking has been successful! <a href="' + url_for('main.clientDashboard') + '"> Click to Return to Dashboard </a>', 'success')
+        flash('Your booking has been successful!', 'success')
+        return redirect(url_for('main.clientDashboard'))
         
     return render_template('booking.html') 
 
@@ -76,13 +76,18 @@ def proceed_to_payment(booking_id):
 def modify_booking(booking_id):
     booking = Booking.query.get_or_404(booking_id)
     if booking.user_id != current_user.id:
-        flash('You are not authorized to modify this booking.', 'error')
+        flash('You are not authorized to modify this booking.', 'danger')
         return redirect(url_for('main.clientDashboard'))
 
     # Update booking details
-    booking.property_type = request.form['property_type']
-    booking.date = request.form['date']
-    # Add other fields as necessary
+    booking.username = request.form['username']
+    booking.email = request.form['email']
+    booking.telephone = request.form['telephone']
+    booking.property_type = request.form['property-type']
+    booking.booking_hours = request.form['booking-hours']
+    
+    date_str = request.form['date']
+    booking.date = datetime.strptime(date_str, '%d/%m/%Y').date()
 
     db.session.commit()
     flash('Booking modified successfully.', 'success')
@@ -113,12 +118,12 @@ def bookingHistory():
     if property_type:
         bookings_query = bookings_query.filter(Booking.property_type.ilike(f'%{property_type}%'))
     if start_date:
-        start_date_obj = datetime.datetime.strptime(start_date, '%d/%m/%Y').date()
-        bookings_query = bookings_query.filter(Booking.date >= start_date_obj.strftime('%Y-%m-%d'))
+        start_date_obj = datetime.strptime(start_date, '%d/%m/%Y').date()
+        bookings_query = bookings_query.filter(Booking.date >= start_date_obj)
     if end_date:
-        end_date_obj = datetime.datetime.strptime(end_date, '%d/%m/%Y').date()
-        bookings_query = bookings_query.filter(Booking.date <= end_date_obj.strftime('%Y-%m-%d'))
+        end_date_obj = datetime.strptime(end_date, '%d/%m/%Y').date()
+        bookings_query = bookings_query.filter(Booking.date <= end_date_obj)
 
     bookings = bookings_query.all()   
-    return render_template('bookingHistory.html', active_page='payment',  bookings=bookings)
+    return render_template('bookingHistory.html', active_page='bookingHistory',  bookings=bookings)
 

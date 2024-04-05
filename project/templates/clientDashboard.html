@@ -16,7 +16,7 @@
                 <a  href="{{url_for('main.landingpage')}}"> Rowley Company Overview </a>
             </div>
             <div class="agent-btn">
-                <a href="{{url_for('auth.agentLogin')}}"><button><i class="fas fa-sign-in-alt"></i> Login as a Agent</button></a>
+                <a href="{{url_for('auth.agentLogin')}}"><button><i class="fas fa-sign-in-alt"></i> Login as Agent</button></a>
            </div>
         </div>
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -27,7 +27,7 @@
             </div>
           {% endfor %}
         {% endif %}
-      {% endwith %}
+        {% endwith %}
         <div class="middle-part">
             <div class="bookings-part">
                 <h2> Your Bookings </h2>
@@ -35,7 +35,7 @@
                 <div class="booking-card">
                     <div class="booking-detail">
                         <h3> Property: {{ booking.property_type }} </h3>
-                        <p> Booked for: <strong> {{ booking.booking_hours}}  {{ booking.date }} </strong></p>
+                        <p> Booked for: <strong> {{ booking.booking_hours}}  {{ booking.date.strftime('%d/%m/%Y') }} </strong></p>
                     </div>
                     <div class="booking-actions">
                         <button class="modify-btn" onclick="showModifyForm('{{ booking.id }}')"> Modify </button>
@@ -65,7 +65,7 @@
                                         <option value="4:00pm" {{ 'selected' if booking.booking_hours == '4:00pm' else '' }}> 4:00pm </option>
                                         <option value="5:30pm" {{ 'selected' if booking.booking_hours == '5:30pm' else '' }}> 5:30pm </option>
                                     </select>
-                                    <input type="text" name="date" id="datepicker-{{ booking.id }}" value="{{ booking.date }}" required>
+                                    <input type="text" name="date" id="datepicker-{{ booking.id }}" value="{{ booking.date.strftime('%d/%m/%Y') }}" required>
                                     <button type="submit"> Submit Changes</button>
                                 </form>
                             </div>
