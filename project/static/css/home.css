@@ -1,7 +1,4 @@
-section{
-    background-color: #E1E9E5;
 
-}
 /* Introduction section */
 .intro {
     text-align: center;
@@ -227,7 +224,7 @@ section{
     font-size: 4vw;
 }
   .intro p {
-  font-size: 2vw;
+  font-size: 2.5vw;
 }
   .property {
   margin: 0 auto;

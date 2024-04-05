@@ -1,12 +1,11 @@
 .profile-check {
-    background-color: rgb(41, 41, 141);
-    border: 5px solid gold;
+    background-color: #E1E9E5;
     border-radius: 15px;
     padding: 20px 80px;
     width: 100%;
     display: flex;
     justify-content: center;
-    height: calc(100vh-); 
+    height: calc(100vh); 
 }
 .profile-form {
     max-width: 400px;
@@ -14,16 +13,33 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
 }
-.profile-form input{
-    padding: 22px 15px 10px 0;
-    margin-top: 23px;
-    background: cadetblue;
-    font-size: 15px;
+.input-field{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+.input-field input{
+    padding: 15px;
+    background: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
     border-radius: 10px;
+    border: 2px solid #e0e0e0;
     text-align: center;
 
 }
+
+.input-field input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.5); 
+}
+
 .submit-btn{
     margin-bottom: 20px;
     margin-top: 15px;
@@ -36,9 +52,25 @@
     color: black;
     font-size: 14px;
     font-weight: bold;
-    padding: 10px;
+    padding: 12px;
     background-color: gold;
     border: none;
-    border-radius: 70px;
+    border-radius: 20px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.submit-btn button:hover {
+    background-color: #b5a642;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 768px) {
+    .profile-check {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .profile-form {
+        width: 100%;
+    }
 }

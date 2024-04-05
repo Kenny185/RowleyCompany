@@ -15,20 +15,30 @@
                 </div>
             {% endif %}
             {% endwith %}
-            <label for="surname"> Surname:</label>
-            <input type="text" name="surname" value="{{ current_user.surname }}" required><br>
-            <label for="first_name"> First Name:</label>
-            <input type="text" name="first_name" value="{{ current_user.first_name }}" required><br>
-            <label for="second_name"> Second Name:</label>
-            <input type="text" name="second_name" value="{{ current_user.second_name }}" required><br>
-            <label for="telephone"> Telephone:</label>
-            <input type="tel" name="telephone" value="{{ current_user.telephone }}" required><br>
-            <label for="email"> Email:</label>
-            <input type="email" name="email" value="{{ current_user.email }}" required><br>
-            <div class="submit-btn">
-                <button type="submit"> Update Details </button>
-            </div>
 
+            <div class="input-field">
+                <label for="surname"><strong> Surname </strong></label>
+                <input type="text" name="surname" value="{{ current_user.surname }}" required><br>
+            </div>
+            <div class="input-field">
+                <label for="first_name"><strong> First Name </strong></label>
+                <input type="text" name="first_name" value="{{ current_user.first_name }}" required><br>
+            </div>
+            <div class="input-field">
+                <label for="second_name"><strong> Second Name  </strong></label>
+                <input type="text" name="second_name" value="{{ current_user.second_name }}" required><br>
+            </div>
+            <div class="input-field">
+                <label for="telephone"><strong> Telephone  </strong></label>
+                <input type="tel" name="telephone" value="{{ current_user.telephone }}" required><br>
+            </div>
+            <div class="input-field">
+                <label for="email"><strong> Email  </strong></label>
+                <input type="email" name="email" value="{{ current_user.email }}" required><br>
+            </div>
+            <div class="submit-btn">
+                <button type="submit"><strong> Update Details </strong></button>
+            </div>
         </form>
     </div>
 {% endblock %}
