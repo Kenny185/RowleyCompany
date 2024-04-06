@@ -3,6 +3,10 @@
 {% block head %}
   {{super()}}
   <link rel="stylesheet" href="/static/css/home.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"/>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
   <title> Rowley Company - Real Estate Management </title>   
 {% endblock %}
 {% block content %}
@@ -13,7 +17,7 @@
     </div>
     <div class="featured-properties">
         <h2><strong> Featured Properties </strong></h2>
-        <div class="property-section">
+        <div class="property-section slick-slider">
             <div class="property">
                 <img src="/static/images/townHouse.jpg" alt="Property" loading="lazy">
                 <p> Beautiful 3-bedroom house in the heart of the city. Spacious and modern design. </p>
@@ -26,6 +30,14 @@
                 <img src="/static/images/apartment2.jpg" alt="Property" loading="lazy">
                 <p> Spacious apartment room with ample space to live and work. Featuring stylish decor, designer finishes and premium amenities. </p>
             </div>
+            <div class="property">
+                <img src="/static/images/familyHouse.jpg" alt="Property" loading="lazy">
+                <p> Spacious apartment room with ample space to live and work. Featuring stylish decor, designer finishes and premium amenities. </p>
+            </div>
+            <div class="property">
+                <img src="/static/images/townHouse2.jpg" alt="Property" loading="lazy">
+                <p> Spacious apartment room with ample space to live and work. Featuring stylish decor, designer finishes and premium amenities. </p>
+            </div>
         </div>
     </div>
     <div class="testimonials-section">
@@ -35,7 +47,7 @@
                 <div class="box-top">
                     <div class="profile">
                         <div class="profile-img">
-                            <img src="images/c-1.jpg" />
+                            <img src="/static/images/photo.jpg" />
                         </div>
                         <div class="name-user">
                             <strong> James Peter </strong>
@@ -58,7 +70,7 @@
                 <div class="box-top">
                     <div class="profile">
                         <div class="profile-img">
-                            <img src="images/c-1.jpg" />
+                            <img src="/static/images/photo2.jpg" />
                         </div>
                         <div class="name-user">
                             <strong> Gloria Njagi </strong>
@@ -96,10 +108,10 @@
         </div>
         <div class="social-media">
             <h3> Follow Us </h3>
-            <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-            <a href="https://twitter.com/i/flow/login"><i class="fa fa-twitter"></i></a>
-            <a href="https://www.instagram.com/accounts/login/"><i class="fa fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/company/login"><i class="fa fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://twitter.com/i/flow/login"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.instagram.com/accounts/login/"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/login"><i class="fa-brands fa-linkedin-in"></i></a>
         </div>
         <div class="signup-link">
             <h3> Sign Up</h3>
@@ -108,4 +120,17 @@
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function(){
+        $('.slick-slider').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplayspeed: 3000,
+            dots: true,
+            
+        });
+    });
+    </script>    
 {% endblock %}

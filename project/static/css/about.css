@@ -1,27 +1,37 @@
 
 .about {
-    background: black url('/static/images/picture2.jpg') center/cover no-repeat;
-    color: gold;
-    padding: 100px;
+    /* background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/images/picture2.jpg') center/cover no-repeat; */
+    /* color: #fff; */
+    padding: 50px 100px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    position: relative;
+    justify-content: space-around;
+    /* position: relative; */
 }
 
-.history,
-.core-values,
-.mission,
-.vision {
-    margin-bottom: 20px;
+.history, .core-values, .mission, .vision {
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 .core-values ul {
     list-style-type: none;
     padding: 0;
 }
-.history p,
-.mission p,
-.vision p {
+.history p, .mission p, .vision p {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
     color: gold;
+}
+@media screen and (max-width: 768px) {
+    .about {
+        padding: 20px;
+    }
 }
