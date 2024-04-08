@@ -23,18 +23,21 @@ body {
     font-size: 20px;
     font-weight: bold;
     text-shadow: 2px 2px 6px gold;
+    text-decoration: none;
 }
-
+.welcome-note a:hover{
+    text-shadow:  2px 2px 6px white;
+}
 .middle-part {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 20px;
     flex-direction: row;
     height: 100vh;
 }
-.appointments {
+.booking {
     max-width: 420px;
-    margin: 20px auto;
+    margin: 0px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -42,24 +45,24 @@ body {
     display: flex;
     flex-direction: column;
 }
-.appointments h2{
+.booking h2{
     margin-bottom: 20px;
     text-align: center;
     color: black;
     font-weight: 700;
 }
-.booking{
+.booking-details{
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 20px;
     justify-content: space-between;
 }
-.booking-details{
-    padding: 15px;
+.booking-details p{
     font-size: 16px;
     font-weight: 500;
     border-radius: 10px;
+    padding: 15px;
     border: 2px solid #e0e0e0;
     text-align: center;
     margin-right: 10px;
@@ -74,6 +77,10 @@ body {
     border: none;
     border-radius: 70px;
     cursor: pointer;
+}
+.booking-action button:hover {
+    background-color: rgb(4, 13, 95);
+    transform: scale(1.05);
 }
 .reports-part {
     display: flex;
@@ -149,3 +156,62 @@ body {
         flex-direction: column;
     }
 }
+
+
+/* Add this CSS to your agentDashboard.css file or any relevant stylesheet */
+
+#booking-details-section {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure the form appears above other content */
+  }
+  
+  #booking-details-form {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+.booking-field {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+  #booking-details-form label {
+    display: block;
+    color: black;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  #booking-details-form input[type="text"],
+  #booking-details-form input[type="email"],
+  #booking-details-form input[type="tel"],
+  #booking-details-form input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  #booking-details-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #booking-details-form button:hover {
+    background-color: #0056b3;
+  }
+  

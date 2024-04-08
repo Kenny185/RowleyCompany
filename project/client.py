@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, render_template, request, session, url_for
+from flask import Blueprint, flash, get_flashed_messages, redirect, render_template, request, session, url_for
 from flask_login import current_user, login_required
 from . import db
 from project.models import Booking, Payment, User
@@ -65,13 +65,13 @@ def payment_post():
     flash('Your payment has been successful', 'success')    
     return redirect(url_for('main.clientDashboard')) 
 
-@client.route('/proceed_to_payment/<int:booking_id>')
+@client.route('/client/proceed_to_payment/<int:booking_id>')
 @login_required
 def proceed_to_payment(booking_id):
     booking = Booking.query.filter_by(id=booking_id, user_id=current_user.id).first_or_404()
     return render_template('payment.html', booking=booking)
 
-@client.route('/modify_booking/<int:booking_id>', methods=['POST'])
+@client.route('/booking/modify/<int:booking_id>', methods=['POST'])
 @login_required
 def modify_booking(booking_id):
     booking = Booking.query.get_or_404(booking_id)
@@ -91,9 +91,11 @@ def modify_booking(booking_id):
 
     db.session.commit()
     flash('Booking modified successfully.', 'success')
+    print("Flash Messages:", get_flashed_messages(with_categories=True))
+
     return redirect(url_for('main.clientDashboard'))
 
-@client.route('/delete_booking/<int:booking_id>', methods=['POST'])
+@client.route('/booking/delete/<int:booking_id>', methods=['POST'])
 @login_required
 def delete_booking(booking_id):
     booking = Booking.query.get_or_404(booking_id)
@@ -106,7 +108,7 @@ def delete_booking(booking_id):
     return redirect(url_for('main.clientDashboard'))
 
 
-@client.route('/booking_history',  methods=['GET'])
+@client.route('/booking/history',  methods=['GET'])
 @login_required
 def bookingHistory():
     property_type = request.args.get('property_type', '')
@@ -126,4 +128,3 @@ def bookingHistory():
 
     bookings = bookings_query.all()   
     return render_template('bookingHistory.html', active_page='bookingHistory',  bookings=bookings)
-

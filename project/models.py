@@ -38,6 +38,7 @@ class Booking(db.Model):
     date = db.Column(db.Date, nullable=False)
     status = db.Column(db.String(20), nullable=False, default='Pending')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    agent_id = db.Column(db.Integer, nullable=False, default='00')
 
     def __repr__(self):
         return f"Booking('{self.username}', '{self.email}', '{self.telephone}', '{self.property_type}', '{self.booking_hours}', '{self.date}')"
@@ -83,6 +84,7 @@ class Message(db.Model):
     content = db.Column(db.Text, nullable=False)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    read = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):
         return f"Message('{self.subject}', '{self.timestamp}')"

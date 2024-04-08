@@ -2,7 +2,7 @@ import datetime
 from flask import Blueprint, render_template, request, current_app
 from flask_login import login_required, current_user
 from itsdangerous import URLSafeSerializer
-from project.models import Booking 
+from project.models import Booking, User 
 from . import db
 
 main = Blueprint('main', __name__)
@@ -15,7 +15,7 @@ def index():
 def home():
     return render_template('home.html', active_page='home')
 
-@main.route('/client_dashboard')
+@main.route('/client/dashboard')
 @login_required
 def clientDashboard():
     bookings = Booking.query.filter_by(user_id=current_user.id).all()

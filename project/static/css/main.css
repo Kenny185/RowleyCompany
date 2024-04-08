@@ -77,25 +77,24 @@ body {
 .nav a.active{
     color: #f1f1f1;
 }
+
 .alert {
-    padding: 15px;
+    padding: 10px;
     border: 1px solid transparent;
-    border-radius: 5px;
+    border-radius: 4px;
     position: absolute;
-    z-index: 1050;
+    z-index: 10;
     top: 100px;
     right: 18px;
-    opacity: 0;
-    transition: opacity 0.5s ease, top 0.5s ease;
   }
   .alert-success {
     color: #3c763d;
-    background-color: #E1E9E5;
+    background-color: #dff0d8;
     border-color: #d6e9c6;
-}
-.alert-danger {
+  }
+  .alert-danger {
     color: #a94442;
-    background-color: #E1E9E5;
+    background-color: #f2dede;
     border-color: #ebccd1;
   }
   @media (max-width: 768px) {

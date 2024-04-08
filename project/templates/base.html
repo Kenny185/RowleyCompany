@@ -55,17 +55,28 @@
             {% endif %}
         </div>
     </div>
+    <div style="position: 'relative'">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <span>{{ message }}</span>
+                        <button>X</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
     <div class="content">
         {% block content %} {% endblock %}
     </div>    
 </body>
 <script>
-setTimeout(function() {
-    var alertDiv = document.getElementById('alert');
-      if (alertDiv) {
-        alertDiv.remove();
-      }
-  }, 5000);
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+        });
+    }, 5000);
 </script>
 </html>
 

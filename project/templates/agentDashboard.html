@@ -13,38 +13,58 @@
         <a  href="{{url_for('main.landingpage')}}"> Rowley Company Overview </a>
     </div>
   </div>
-  {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div id="alert" class="alert alert-{{ category }}">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
-  {% endwith %}
   <div class="middle-part">
+    <div id="booking-details-section" style="display: none;">
+      <h2> Booking Details </h2>
+      <form id="booking-details-form">
+        <div class="booking-field">
+          <label for="booking-username"> Username </label>
+          <input type="text" id="booking-username" name="booking-username" readonly>
+        </div>
+        <div class="booking-field">
+          <label for="booking-email"> Email </label>
+          <input type="email" id="booking-email" name="booking-email" readonly>
+        </div>
+        <div class="booking-field">
+          <label for="booking-telephone"> Telephone </label>
+          <input type="tel" id="booking-telephone" name="booking-telephone" readonly>
+        </div>
+        <div class="booking-field">
+          <label for="booking-property_type"> Property Type </label>
+          <input type="text" id="booking-property_type" name="booking-property_type" readonly>
+        </div>
+        <div class="booking-field">
+          <label for="booking-hours"> Booking Hours </label>
+          <input type="text" id="booking-hours" name="booking-hours" readonly>
+        </div>
+        <div class="booking-field">
+          <label for="booking-date"> Date </label>
+          <input type="date" id="booking-date" name="booking-date" readonly>
+        </div>
+        <button type="button" onclick="hideBookingDetails()"> Close </button>
+      </form>
+    </div>
     <div class="data">
-      <div class="appointments">
-        <h2> Appointments </h2>
+      <div class="booking">
+        <h2> Bookings </h2>
         {% for booking in bookings %}
-          <div class="booking">
-            <div class="booking-details">
+          <div class="booking-details">
+            {% if booking.status == 'Pending' %}
               <p> {{ booking.username }} - {{ booking.date.strftime('%d/%m/%Y') }} </p>
-            </div>
-            <div class="booking-action">
-              {% if booking.status == 'Pending' %}
+              <div class="booking-action">
                 <form action="{{ url_for('agent.accept_booking', booking_id=booking.id) }}" method="post">
                   <button type="submit"> Accept Booking</button>
                 </form>
-              {% endif %}
-            </div>
-            <div class="booking-action">
-              {% if booking.status == 'Accepted' %}
+              </div>
+            {% endif %}
+            {% if booking.status == 'Accepted' %}
+              <p> {{ booking.username }} - {{ booking.date.strftime('%d/%m/%Y') }} </p>
+              <div class="booking-action">
                 <form action="{{ url_for('agent.assign_agent', booking_id=booking.id, agent_id=current_user.id) }}" method="post">
-                  <button type="submit"> Assign to Myself</button>
+                  <button type="submit"> Assign </button>
                 </form>
-              {% endif %}
-            </div>
+              </div>
+            {% endif %}
           </div>
         {% endfor %}
       </div>
@@ -66,6 +86,21 @@
           </button>
         </div>
       </div>
+    </div>
+    <div class="booking">
+      <h2> My Appointments </h2>
+      {% for booking in bookings %}
+        <div class="booking-details">
+            {% if booking.status == 'Assigned' and booking.agent_id == current_user.id %}
+              <p> {{ booking.username }} - {{ booking.date.strftime('%d/%m/%Y') }} </p>
+              <div class="booking-action">
+                <button type="button" onclick="viewBookingDetails('{{ booking.username }}', '{{ booking.email }}', 
+                  '{{ booking.telephone }}', '{{ booking.property_type }}', '{{ booking.booking_hours }}', 
+                  '{{ booking.date.strftime('%Y-%m-%d') }}')"> View Details </button>
+              </div>
+            {% endif %}
+        </div>
+      {% endfor %}
     </div>    
     <div class="form-part">                
         <div class="form-card">
@@ -86,6 +121,23 @@
   </div>
 <section>
 <script>
+  function viewBookingDetails(username, email, telephone, property_type, booking_hours, date) {
+    // Populate the form fields with booking details
+    document.getElementById('booking-username').value = username;
+    document.getElementById('booking-email').value = email;
+    document.getElementById('booking-telephone').value = telephone;
+    document.getElementById('booking-property_type').value = property_type;
+    document.getElementById('booking-hours').value = booking_hours;
+    document.getElementById('booking-date').value = date;
+
+    // Show the booking details section
+    document.getElementById('booking-details-section').style.display = 'block';
+  }
+
+  function hideBookingDetails() {
+    // Hide the booking details section
+    document.getElementById('booking-details-section').style.display = 'none';
+  }
   function generateReport(reportUrl, reportType) {
     // Open a new tab
     var reportWindow = window.open('', '_blank');
@@ -156,5 +208,10 @@
     // Make a request to download the PDF report
       window.open(`/reports/generate_pdf/${reportType}`, '_blank');
   }
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+  }, 5000);
 </script>
 {% endblock %}
