@@ -13,39 +13,73 @@
         <a  href="{{url_for('main.landingpage')}}"> Rowley Company Overview </a>
     </div>
   </div>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div id="alert" class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
   <div class="middle-part">
-    <div class="reports-part">
-      <h1> Reports </h1>
-      <div class="report-div">
-        <button class="report-data" onclick="generateReport('{{ url_for('reports.clients_report') }}', 'clients')">
-            Clients Report
-        </button>
-      </div> 
-      <div class="report-div">
-        <button class="report-data" onclick="generateReport('{{ url_for('reports.booking_report') }}', 'bookings')">
-          Booking Report
-        </button>
+    <div class="data">
+      <div class="appointments">
+        <h2> Appointments </h2>
+        {% for booking in bookings %}
+          <div class="booking">
+            <div class="booking-details">
+              <p> {{ booking.username }} - {{ booking.date.strftime('%d/%m/%Y') }} </p>
+            </div>
+            <div class="booking-action">
+              {% if booking.status == 'Pending' %}
+                <form action="{{ url_for('agent.accept_booking', booking_id=booking.id) }}" method="post">
+                  <button type="submit"> Accept Booking</button>
+                </form>
+              {% endif %}
+            </div>
+            <div class="booking-action">
+              {% if booking.status == 'Accepted' %}
+                <form action="{{ url_for('agent.assign_agent', booking_id=booking.id, agent_id=current_user.id) }}" method="post">
+                  <button type="submit"> Assign to Myself</button>
+                </form>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
       </div>
-      <div class="report-div">
-        <button class="report-data" onclick="generateReport('{{ url_for('reports.payment_report') }}', 'payments')">
-          Payment Report
-        </button>
+      <div class="reports-part">
+        <h1> Reports </h1>
+        <div class="report-div">
+          <button class="report-data" onclick="generateReport('{{ url_for('reports.clients_report') }}', 'clients')">
+             Clients Report <i class="fas fa-chart-bar"></i>
+          </button>
+        </div> 
+        <div class="report-div">
+          <button class="report-data" onclick="generateReport('{{ url_for('reports.booking_report') }}', 'bookings')">
+            Booking Report <i class="fas fa-chart-line"></i>
+          </button>
+        </div>
+        <div class="report-div">
+          <button class="report-data" onclick="generateReport('{{ url_for('reports.payment_report') }}', 'payments')">
+            Payment Report <i class="fas fa-file-invoice-dollar"></i>
+          </button>
+        </div>
       </div>
-
     </div>    
     <div class="form-part">                
         <div class="form-card">
             <h2><strong> Profile </strong></h2>
-            <p> To manage you account information </p>
+            <p> To manage you account information <i class="fas fa-user-cog"></i> </p>
             <form action="{{ url_for('main.profile') }}">
-                <button type="submit"> Click here </button>
+                <button type="submit"> Go to Profile </button>
             </form>
         </div>
         <div class="form-card">
             <h2><strong> Booking </strong></h2>
-            <p> To secure one of our spaces  </p>
+            <p> Secure a property booking <i class="fas fa-calendar-check"></i></p>
             <form action="{{ url_for('main.booking') }}">
-                <button type="submit"> Click here </button>
+                <button type="submit"> Book now </button>
             </form>
         </div>   
     </div>

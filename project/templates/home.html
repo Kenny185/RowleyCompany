@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="/static/css/home.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"/>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
   <title> Rowley Company - Real Estate Management </title>   
@@ -32,11 +33,20 @@
             </div>
             <div class="property">
                 <img src="/static/images/familyHouse.jpg" alt="Property" loading="lazy">
-                <p> Spacious apartment room with ample space to live and work. Featuring stylish decor, designer finishes and premium amenities. </p>
+                <p> A charming 3-bedroom house designed for convenience and comfort.
+                    Ideal for those seeking a straightforward yet cozy living space. </p>
             </div>
             <div class="property">
                 <img src="/static/images/townHouse2.jpg" alt="Property" loading="lazy">
-                <p> Spacious apartment room with ample space to live and work. Featuring stylish decor, designer finishes and premium amenities. </p>
+                <p> A modern 2-bedroom house designed for comfort and functionality.
+                    Perfect for those seeking a contemporary living space tailored to their lifestyle needs.
+
+
+
+
+
+
+ </p>
             </div>
         </div>
     </div>
@@ -127,8 +137,18 @@
             slidesToShow: 3,
             slidesToScroll: 1,
             autoplay: true,
-            autoplayspeed: 3000,
+            autoplayspeed: 2500,
             dots: true,
+            arrows: true,
+            adaptiveHeight: true,
+            responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
             
         });
     });

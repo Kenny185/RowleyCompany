@@ -21,10 +21,11 @@ def clientDashboard():
     bookings = Booking.query.filter_by(user_id=current_user.id).all()
     return render_template('clientDashboard.html', active_page='clientDashboard', bookings=bookings)
 
-@main.route('/agent_dashboard')
+@main.route('/agent/dashboard')
 @login_required
 def agentDashboard():
-    return render_template('agentDashboard.html', active_page='agentDashboard')
+    bookings = Booking.query.all()
+    return render_template('agentDashboard.html', active_page='agentDashboard', bookings=bookings)
 
 @main.route('/rowleycompany')
 @login_required

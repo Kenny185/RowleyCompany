@@ -67,7 +67,7 @@
   .property:hover img {
     filter: brightness(110%);
   }
-  
+
   .testimonials-section {
     padding: 10px;
     display: flex;
@@ -190,7 +190,15 @@
     transition: color 0.3s ease;
     color: black;
   }
-  
+  .footer p, .footer a {
+    color: #333; /* Text color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #007bff; 
+}
   .quick-links ul li a:hover, 
   .social-media a:hover {
     color: #007bff;
@@ -205,6 +213,7 @@
   }
 .signup-link {
   justify-content: center;
+  text-align: center;
 }
 
 .signup-link a{
@@ -232,10 +241,12 @@
   font-size: 2.5vw;
 }
   .property {
-  margin: 0 auto;
+  margin: 10px auto;
+  width: 90%;
 }
   .testimonial-card {
-  margin: 10px; 
+  margin: 10px auto; 
+  width: 100%;
 }
   .footer {
       grid-template-columns: 1fr;

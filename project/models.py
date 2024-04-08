@@ -16,6 +16,8 @@ class User(UserMixin, db.Model):
 
     # Relationship with bookings
     bookings = db.relationship('Booking', backref='user', lazy=True)
+    bookings_assigned = db.relationship('Booking', backref='agent', lazy=True)
+
 
     # Additional fields for agent dashboard
     properties_managed = db.relationship('Property', backref='agent', lazy=True)
@@ -34,6 +36,7 @@ class Booking(db.Model):
     property_type = db.Column(db.String(50), nullable=False)
     booking_hours = db.Column(db.String(50), nullable=False)
     date = db.Column(db.Date, nullable=False)
+    status = db.Column(db.String(20), nullable=False, default='Pending')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
