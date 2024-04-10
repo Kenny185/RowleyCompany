@@ -61,7 +61,7 @@
                 {% for category, message in messages %}
                     <div class="alert alert-{{ category }}">
                         <span>{{ message }}</span>
-                        <button>X</button>
+                        <button type="button" class="close-button"> X </button>
                     </div>
                 {% endfor %}
             {% endif %}
@@ -77,6 +77,14 @@
             $(this).remove(); 
         });
     }, 5000);
+    document.addEventListener('DOMContentLoaded', function () {
+        const closeButtons = document.querySelectorAll('.close-button');
+        closeButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                this.parentNode.style.display = 'none';
+            });
+        });
+    });
 </script>
 </html>
 

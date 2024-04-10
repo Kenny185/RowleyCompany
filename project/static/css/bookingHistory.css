@@ -1,0 +1,62 @@
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+form {
+    margin-bottom: 20px;
+  
+}
+.container select, .container input{
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
+}
+.container button{
+    padding: 10px;
+    background-color: rgb(58, 58, 150);
+    margin-left: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+.container button:hover{
+    background-color: gold;
+    
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #f0f0f0;
+}
+
+td, th {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #e0e0e0;
+}

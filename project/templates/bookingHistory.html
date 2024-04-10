@@ -9,7 +9,7 @@
   <title>Rowley Company - Booking History </title>
 {% endblock %}
 {% block content %}
-<div>
+<div class="container">
     <h2> Booking History </h2>
     <form action="{{ url_for('client.bookingHistory') }}" method="get">
         <select name="property_type">
@@ -20,22 +20,36 @@
         </select>
         <input type="text" id="start_date" name="start_date" placeholder="Start Date">
         <input type="text" id="end_date" name="end_date" placeholder="End Date">
-        <button type="submit">Filter</button>
+        <button type="submit"> Filter </button>
     </form>
-    {% if bookings %}
-        {% for booking in bookings %}
-        <div class="booking">
-            <p>Username: {{ booking.username }}</p>
-            <p>Email: {{ booking.email }}</p>
-            <p>Telephone: {{ booking.telephone }}</p>
-            <p>Property Type: {{ booking.property_type }}</p>
-            <p>Booking Hours: {{ booking.booking_hours }}</p>
-            <p>Date: {{ booking.date }}</p>
-        </div>
-        {% endfor %}
-    {% else %}
-        <p> No bookings found. </p>
-    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>Property Type</th>
+                <th>Booking Hours</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if bookings %}            
+                {% for booking in bookings %}
+                     <tr>
+                        <td>{{ booking.username }}</td>
+                        <td>{{ booking.email }}</td>
+                        <td>{{ booking.telephone }}</td>
+                        <td>{{ booking.property_type }}</td>
+                        <td>{{ booking.booking_hours }}</td>
+                        <td>{{ booking.date.strftime('%d/%m/%Y') }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <p> No bookings found. </p>
+            {% endif %}
+        </tbody>
+    </table>
 </div>
 <script>
     $(function() {

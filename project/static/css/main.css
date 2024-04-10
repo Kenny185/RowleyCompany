@@ -87,6 +87,12 @@ body {
     top: 100px;
     right: 18px;
   }
+  .alert button{
+    border: none;
+    background-color: blueviolet;
+    cursor: pointer;
+
+  }
   .alert-success {
     color: #3c763d;
     background-color: #dff0d8;

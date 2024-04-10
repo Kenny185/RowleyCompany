@@ -15,8 +15,8 @@
   </div>
   <div class="middle-part">
     <div id="booking-details-section" style="display: none;">
-      <h2> Booking Details </h2>
       <form id="booking-details-form">
+        <h2> Booking Details </h2>
         <div class="booking-field">
           <label for="booking-username"> Username </label>
           <input type="text" id="booking-username" name="booking-username" readonly>
@@ -105,7 +105,7 @@
     <div class="form-part">                
         <div class="form-card">
             <h2><strong> Profile </strong></h2>
-            <p> To manage you account information <i class="fas fa-user-cog"></i> </p>
+            <p> Manage you account information <i class="fas fa-user-cog"></i> </p>
             <form action="{{ url_for('main.profile') }}">
                 <button type="submit"> Go to Profile </button>
             </form>
